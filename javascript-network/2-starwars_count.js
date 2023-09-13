@@ -14,7 +14,7 @@ request(apiUrl, (error, response, body) => {
 
   for (const film of films) {
     const characters = film.characters;
-    if (characters.includes(https://swapi-api.alx-tools.com/api/people/${characterId}/)) {
+    if (characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}/`)) {
       count++;
     }
   }
