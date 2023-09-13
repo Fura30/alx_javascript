@@ -1,13 +1,27 @@
+
 const request = require('request');
 
 const movieId = process.argv[2];
-const url = https://swapi-api.alx-tools.com/api/films/${movieId};
 
-request(url, (error, response, body) => {
-  if (!error && response.statusCode === 200) {
-    const movie = JSON.parse(body);
-    console.log(movie.title);
+if (!movieId || isNaN(movieId)) {
+  console.error('Please provide a valid movie ID as a command-line argument.');
+  process.exit(1);
+}
+
+const apiUrl =  https://swapi-api.alx-tools.com/api/films/${movieId} ;
+
+request(apiUrl, (error, response, body) => {
+  if (error) {
+    console.error('Error:', error);
+  } else if (response.statusCode !== 200) {
+    console.error('API request failed with status code:', response.statusCode);
   } else {
-    console.log('Error retrieving movie information');
+    try {
+      const movieData = JSON.parse(body);
+      console.log(movieData.title);
+    } catch (parseError) {
+      console.error('Error parsing API response:', parseError);
+    }
   }
 });
+ 
