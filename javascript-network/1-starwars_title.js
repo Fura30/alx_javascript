@@ -1,11 +1,13 @@
-const fetch = require('node-fetch');
+const request = require('request');
 
 const movieId = process.argv[2];
-const apiUrl = https://swapi-api.alx-tools.com/api/films/${movieId};
+const url = https://swapi-api.alx-tools.com/api/films/${movieId};
 
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data.title);
-  })
-  .catch(error => console.error(error));
+request(url, (error, response, body) => {
+  if (!error && response.statusCode === 200) {
+    const movie = JSON.parse(body);
+    console.log(movie.title);
+  } else {
+    console.log('Error retrieving movie information');
+  }
+});
