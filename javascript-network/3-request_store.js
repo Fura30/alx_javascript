@@ -33,7 +33,7 @@ request(url, (error, response, body) => {
       console.log( `Successfully saved the content of ${url} to ${outputPath}`);
     });
   } else {
-    console.error( Failed to fetch URL (${url}), status code: ${response.statusCode} );
+    console.error( `Failed to fetch URL (${url}), status code: ${response.statusCode}` );
     process.exit(1);
   }
 });
