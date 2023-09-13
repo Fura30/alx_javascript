@@ -24,7 +24,7 @@ request(url, (error, response, body) => {
   // Check if the request was successful (status code 200)
   if (response.statusCode === 200) {
     // Write the response body to the specified file with UTF-8 encoding
-    fs.writeFile(outputPath, body, 'utf-8', (err) => {
+    fs.writeFile( body, 'utf-8', (err) => {
       if (err) {
         console.error('Error writing to file:', err);
         process.exit(1);
