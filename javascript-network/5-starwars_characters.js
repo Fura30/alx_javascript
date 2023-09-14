@@ -35,7 +35,7 @@ request(apiUrl, (error, response, body) => {
     });
   };
 
-  console.log( Characters in ${movieData.title}: );
+  console.log(` Characters in ${movieData.title}: `);
 
   // Fetch and print character names
   characterUrls.forEach(fetchCharacterData);
