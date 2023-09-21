@@ -6,7 +6,7 @@ const host = 'localhost';
 const port = 8000;
 
 const requestListener = function (req, res) {
-    fs.readFile(__dirname + "/index.html")
+    fs.readFile(__dirname + "/table1.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
