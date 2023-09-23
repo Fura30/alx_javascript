@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cookie Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .cookies-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login into the website</h1>
+    <div class="container">
+        <div class="form-group">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email">
+        </div>
+        <div class="btn-container">
+            <button class="btn" onclick="setCookies()">Log me in</button>
+            <button class="btn" onclick="showCookies()">Show the cookies</button>
+        </div>
+        <div class="cookies-container">
+            <h3>Cookies:</h3>
+            <div id="cookies"></div>
+        </div>
+    </div>
+
+    <script>
+        function setCookies() {
+            var firstname = document.getElementById("firstname").value;
+            var email = document.getElementById("email").value;
+            
+            var date = new Date();
+            date.setTime(date.getTime() + (10 * 24 * 60 * 60 * 1000)); // 10 days
+            
+            var expires = "expires=" + date.toUTCString();
+            
+            document.cookie = "firstname=" + firstname + ";" + expires;
+            document.cookie = "email=" + email + ";" + expires;
+        }
+
+        function getCookie(name) {
+            var cookies = document.cookie.split("; ");
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].split("=");
+                if (cookie[0] === name) {
+                    return cookie[1];
+                }
+            }
+            return "";
+        }
+
+        function showCookies() {
+            var email = getCookie("email");
+            var firstname = getCookie("firstname");
+            
+            var cookiesContainer = document.getElementById("cookies");
+            cookiesContainer.innerHTML = "Email: " + email + " - Firstname: " + firstname;
+        }
+    </script>
+</body>
+
+</html>
