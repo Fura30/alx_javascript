@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart</title>
+</head>
+<body>
+  <h1>Available Items</h1>
+  <ul id="available-items"></ul>
+
+  <h1>Your Cart</h1>
+  <p id="cart-message"></p>
+
+<script>
+// Check if local storage is available
+if (typeof(Storage) === "undefined") {
+  alert("Sorry, your browser does not support Web storage. Try again with a better one");
+} else {
+  // Retrieve cart from local storage and display
+  displayCart();
+
+  // Create available items
+  const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+  const availableItemsList = document.getElementById("available-items");
+
+  availableItems.forEach(item => {
+    const listItem = document.createElement("li");
+    listItem.textContent = item;
+    listItem.addEventListener("click", () => addItemToCart(item));
+    availableItemsList.appendChild(listItem);
+  });
+}
+
+// Function to add item to cart
+function addItemToCart(item) {
+  localStorage.setItem(item, true);
+  displayCart();
+}
+
+// Function to display cart
+function displayCart() {
+  const cartMessage = document.getElementById("cart-message");
+  const cartCount = localStorage.length;
+
+  if (cartCount === 0) {
+    cartMessage.textContent = "";
+  } else {
+    cartMessage.textContent = You previously had ${cartCount} item${cartCount > 1 ? "s" : ""} in your cart.;
+  }
+}
+
+
+  </script>
+</body>
+</html>
