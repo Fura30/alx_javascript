@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setCookiesAndShowWelcomeMessage(firstName) {
+            Cookies.set("firstName", firstName);
+            Cookies.set("isLoggedIn", true);
+            showWelcomeMessageOrForm();
+        }
+
+        function deleteCookiesAndShowForm() {
+            Cookies.remove("firstName");
+            Cookies.remove("isLoggedIn");
+            showForm();
+        }
+
+        function showForm() {
+            var welcomeMessage = document.getElementById("welcome-message");
+            var loginForm = document.getElementById("login-form");
+
+            if (welcomeMessage) {
+                welcomeMessage.remove();
+            }
+
+            loginForm.classList.remove("hidden");
+        }
+
+        function hideForm() {
+            var loginForm = document.getElementById("login-form");
+            loginForm.classList.add("hidden");
+        }
+
+        function showWelcomeMessageOrForm() {
+            var firstName = Cookies.get("firstName");
+            var isLoggedIn = Cookies.get("isLoggedIn");
+
+            if (!isLoggedIn) {
+                showForm();
+                return;
+            }
+
+            var body = document.body;
+            body.innerHTML = "";
+
+            var welcomeMessage = document.createElement("h1");
+            var logoutLink = document.createElement("a");
+
+            welcomeMessage.textContent = "Welcome " + firstName;
+            logoutLink.textContent = "(logout)";
+            logoutLink.href = "#";
+            logoutLink.style.fontStyle = "italic";
+            logoutLink.style.fontWeight = "normal";
+            logoutLink.style.marginLeft = "10px";
+
+            logoutLink.addEventListener("click", function() {
+                deleteCookiesAndShowForm();
+                welcomeMessage.remove();
+                return false;
+            });
+
+            welcomeMessage.appendChild(logoutLink);
+            body.appendChild(welcomeMessage);
+        }
+    </script>
+
+    <div id="login-form">
+        <h2>Login Form</h2>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button onclick="setCookiesAndShowWelcomeMessage('John')">Login</button>
+    </div>
+
+    <script>
+        showWelcomeMessageOrForm();
+    </script>
+</body>
+</html>
+
+

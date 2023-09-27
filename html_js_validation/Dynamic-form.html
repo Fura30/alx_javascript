@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Form</title>
+  <script src="validation.js"></script>
+</head>
+<body>
+  <h1>Dynamic Form</h1>
+
+  <form id="dynamicForm" onsubmit="submitForm(event)">
+    <label for="numFields">Number of Fields:</label>
+    <select id="numFields" name="numFields">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+
+    <div id="inputContainer"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script src="2-dynamic-form.js"></script>
+</body>
+</html>

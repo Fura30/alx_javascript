@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cookies-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Login into the website</h1>
+            <input type="text" id="firstname" placeholder="First Name">
+            <input type="text" id="email" placeholder="Email">
+            <button onclick="setCookies()">Log me in</button>
+            <button onclick="showCookies()">Show the cookies</button>
+        </div>
+    </div>
+
+    <div class="container cookies-container">
+        <div id="cookies"></div>
+    </div>
+
+    <script>
+function setCookies() {
+    const firstname = document.getElementById('firstname').value;
+    const email = document.getElementById('email').value;
+
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 10);
+
+    document.cookie = firstname=${firstname}; expires=${expirationDate.toUTCString()};
+    document.cookie = email=${email}; expires=${expirationDate.toUTCString()};
+}
+
+        function showCookies() {
+            const cookiesDiv = document.getElementById('cookies');
+            cookiesDiv.innerHTML = '';
+
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                const [name, value] = cookie.split('=');
+                cookiesDiv.innerHTML += <p>${name}: ${value}</p>;
+            }
+        }
+        
+         
+    </script>
+</body>
+</html
